@@ -79,7 +79,7 @@ $$
 
 其中：
 $$
-FCF_N = FCF_0 \times (1+g)^N
+\text{FCF_N} = FCF_0 \times (1+g)^N
 $$
 
 ## 每股合理價
