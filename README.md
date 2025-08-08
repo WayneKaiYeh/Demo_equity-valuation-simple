@@ -68,23 +68,32 @@ equity-valuation-demo/
 - 永續成長率 \( g_t \)
 - 預估年數 \( N \)
 
+
 公式：
-\[
+$$
 \text{Firm Value} =
 \sum_{t=1}^{N} \frac{FCF_0 \cdot (1+g)^t}{(1+r)^t}
 +
 \frac{FCF_N \cdot (1+g_t)}{(r - g_t)} \cdot \frac{1}{(1+r)^N}
-\]
+$$
 
 其中：
-\[
+$$
 FCF_N = FCF_0 \cdot (1+g)^N
-\]
+$$
 
 每股合理價：
-\[
+$$
 \text{Fair Value per Share} = \frac{\text{Firm Value} + \text{Cash} - \text{Debt}}{\text{Shares Outstanding}}
-\]
+$$
+
+
+
+
+
+
+
+
 
 ---
 
