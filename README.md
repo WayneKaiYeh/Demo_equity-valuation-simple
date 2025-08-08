@@ -13,8 +13,8 @@
 
 ---
 
-## 📂 專案結構
-'''
+## 📂 Structure
+```
 equity-valuation-demo/
 ├─ config.json # 模型假設參數
 ├─ tickers.txt # 要分析的股票代碼
@@ -23,7 +23,7 @@ equity-valuation-demo/
 │ ├─ results.csv # 計算結果
 │ └─ report.html # 帶顏色的 HTML 報告
 └─ README.md # 專案說明
-'''
+```
 
 
 
