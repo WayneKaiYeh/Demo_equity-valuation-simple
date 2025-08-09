@@ -74,15 +74,27 @@ equity-valuation-demo/
 ## 公司價值計算公式
 
 $$
-\text{Firm Value} = \sum_{t=1}^{N} \frac{FCF_0 \cdot (1+g)^t}{(1+r)^t} 
-+ \frac{FCF_N \cdot (1+g_t)}{r - g_t} \cdot \frac{1}{(1+r)^N}
+\text{Firm Value} = \sum_{t=1}^{N} \frac{FCF_0 \cdot (1+g)^t}{(1+r)^t} + \frac{FCF_N \cdot (1+g_t)}{(r - g_t)} \cdot \frac{1}{(1+r)^N}
 $$
 
 其中：
+$
+FCF_N = FCF_0 \times (1+g)^N
+$
+
+## 每股合理價
+
 $$
-FCF_N = FCF_0 \cdot (1+g)^N
+\text{Fair Value per Share} = \frac{\text{Firm Value} + \text{Cash} - \text{Debt}}{\text{Shares Outstanding}}
 $$
 
+## 變數說明
+
+- $FCF_0$：基期自由現金流
+- $g$：成長率
+- $r$：折現率（WACC）
+- $N$：預測期間
+- $g_t$：永續成長率
 
 ## 每股合理價
 
