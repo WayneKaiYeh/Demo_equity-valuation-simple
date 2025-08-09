@@ -134,9 +134,9 @@ $$D_n = D_0 \times (1+g_1)^n$$
 
 ### 3. Graham Number
 Benjamin Graham 提出的保守合理價公式：
-\[
+$$
 \text{Graham Number} = \sqrt{22.5 \cdot EPS \cdot BVPS}
-\]
+$$
 - EPS：每股盈餘
 - BVPS：每股淨值
 
