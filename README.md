@@ -124,11 +124,7 @@ $$
 
 公式：
 
-$$
-
-\text{Value} = \sum_{t=1}^{n} \frac{D_0 \times (1+g_1)^t}{(1+r)^t} + \frac{D_n \times (1+g_2)}{(r - g_2)} \times \frac{1}{(1+r)^n}
-
-$$
+$$\text{Value} = \sum_{t=1}^{n} \frac{D_0 \times (1+g_1)^t}{(1+r)^t} + \frac{D_n \times (1+g_2)}{(r - g_2)} \times \frac{1}{(1+r)^n}$$
 
 其中：
 
