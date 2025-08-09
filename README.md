@@ -8,7 +8,7 @@
 - **Buffett Approximation**（巴菲特簡化版合理價公式）
 
 並自動輸出：
-- `results.csv`：數值結果
+- `results.csv`：Result
 - `report.html`：帶顏色標註的估值報表（綠色 = 被低估，紅色 = 被高估）
 
 ---
@@ -16,13 +16,13 @@
 ## 📂 Structure
 ```
 equity-valuation-demo/
-├─ config.json # 模型假設參數
-├─ tickers.txt # 要分析的股票代碼
-├─ valuation.ipynb # 主程式（Notebook 版本）
+├─ config.json # default parameters
+├─ tickers.txt # stocks
+├─ valuation.ipynb # 
 ├─ output/
-│ ├─ results.csv # 計算結果
-│ └─ report.html # 帶顏色的 HTML 報告
-└─ README.md # 專案說明
+│ ├─ results.csv # result
+│ └─ report.html # HTML report
+└─ README.md 
 ```
 
 
@@ -74,13 +74,15 @@ equity-valuation-demo/
 ## 公司價值計算公式
 
 $$
-\text{Firm Value} = \sum_{t=1}^{N} \frac{FCF_0 \cdot (1+g)^t}{(1+r)^t} + \frac{FCF_N \cdot (1+g_t)}{(r - g_t)} \cdot \frac{1}{(1+r)^N}
+\text{Firm Value} = \sum_{t=1}^{N} \frac{FCF_0 \cdot (1+g)^t}{(1+r)^t} 
++ \frac{FCF_N \cdot (1+g_t)}{r - g_t} \cdot \frac{1}{(1+r)^N}
 $$
 
 其中：
 $$
-\text{FCF_N} = FCF_0 \times (1+g)^N
+FCF_N = FCF_0 \cdot (1+g)^N
 $$
+
 
 ## 每股合理價
 
