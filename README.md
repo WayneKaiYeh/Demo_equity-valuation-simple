@@ -145,9 +145,12 @@ $$
 
 ### 4. Buffett Approximation
 簡化版的巴菲特合理價公式（教學用）：
-\[
+
+
+$
 \text{Fair Price} = EPS \times (8.5 + 2 \times g)
-\]
-- \( g \)：成長率（%）
+$
+
+$g$：成長率（%）
 
 ---
