@@ -1,6 +1,4 @@
-
 # 📈 Valuation Models 
-
 
 ---
 
@@ -17,18 +15,17 @@
 
 ## Models at a glance (7 total)
 
-
 | Model | Status | Data Source / Calculation | Formula |
 |---|:--:|---|---|
 | **DCF (Discounted Cash Flow)** | ✅ Implemented | Free cash flow from cashflow statement; discount & terminal growth from `config.json` | See formula below |
 | **DDM (Dividend Discount Model)** | ✅ Implemented | Dividend history or `EPS × payout_ratio`; long‑run `g` from `config.json` or `growth_rates.csv` | Two‑stage Gordon |
-| **Graham Number** | ✅ Implemented | EPS & BVPS from fundamentals | \$ \sqrt{22.5 \times EPS \times BVPS} \$ |
-| **Buffett Fair Value (approx.)** | ✅ Implemented | EPS & growth (percent) from `growth_rates.csv` or info fallback | \$$ EPS \times (8.5 + 2g\%) \$$ |
+| **Graham Number** | ✅ Implemented | EPS & BVPS from fundamentals | √(22.5 × EPS × BVPS) |
+| **Buffett Fair Value (approx.)** | ✅ Implemented | EPS & growth (percent) from `growth_rates.csv` or info fallback | `EPS × (8.5 + 2g%)` |
 | **Relative Valuation (P/E, P/B)** | ⚠️ Data pulled only | `trailingPE`, `priceToBook` (or `price / bookValue`) from `yfinance` | Direct multiples |
-| **Residual Income (ROE snapshot)** | ⚠️ Data pulled only | ROE, BVPS, cost of equity \$ k_e=r_f+\beta \cdot MRP \$ | \$ AE=(ROE-k_e)\times BV \$ *(snapshot)* |
-| **EV/EBITDA Multiple** | ⚠️ Data pulled only | EV from market cap + debt − cash; EBITDA from info | \$ \tfrac{EV}{EBITDA} \$ |
+| **Residual Income (ROE snapshot)** | ⚠️ Data pulled only | ROE, BVPS, cost of equity ke = rf + β × MRP | AE = (ROE - ke) × BV *(snapshot)* |
+| **EV/EBITDA Multiple** | ⚠️ Data pulled only | EV from market cap + debt − cash; EBITDA from info | EV / EBITDA |
 
-> **Why “Data pulled only”?** For the last three, the notebook outputs the raw/derived ratios for comparison. A full multi‑period RI valuation is shown by formula but intentionally not expanded in this demo.
+> **Why "Data pulled only"?** For the last three, the notebook outputs the raw/derived ratios for comparison. A full multi‑period RI valuation is shown by formula but intentionally not expanded in this demo.
 
 ---
 
@@ -51,69 +48,49 @@ output/
 
 - **Ticker** — instrument code (e.g., `AAPL`, `2330.TW`, `GLD`)  
 - **price** — latest price (recent close or real‑time fallback)  
-- **trailingPE** — \$ \mathrm{PE}=\tfrac{Price}{EPS_{TTM}} \$  
-- **priceToBook** — \$ \mathrm{P/B}=\tfrac{Price}{BVPS} \$  
+- **trailingPE** — PE = Price / EPS_TTM  
+- **priceToBook** — P/B = Price / BVPS  
 - **beta (β)** — market sensitivity (≈1 market‑like; >1 more volatile; <1 defensive)  
-- **ke** — cost of equity via CAPM: \$ k_e=r_f+\beta\cdot MRP \$  
+- **ke** — cost of equity via CAPM: ke = rf + β × MRP  
 - **net_income** — latest annual net income (GAAP/IFRS)  
-- **book_equity (BV)** — shareholders’ equity = assets − liabilities  
-- **roe** — \$ \tfrac{Net\ Income}{Book\ Equity} \$  
-- **abnormal_earnings (AE)** — \$ (\mathrm{ROE}-k_e)\times BV \$ *(snapshot)*  
-- **ev_to_ebitda** — \$ \tfrac{EV}{EBITDA} \$, with \$ EV=Market\ Cap+Debt-Cash \$
+- **book_equity (BV)** — shareholders' equity = assets − liabilities  
+- **roe** — Net Income / Book Equity  
+- **abnormal_earnings (AE)** — (ROE - ke) × BV *(snapshot)*  
+- **ev_to_ebitda** — EV / EBITDA, with EV = Market Cap + Debt - Cash
 
 ---
 
 ## 🧮 Formulae (reference)
 
-**Toy DCF**  
-\\[
-\text{Firm Value}=\sum_{t=1}^{N}\frac{FCF_0(1+g)^t}{(1+r)^t}+\frac{FCF_N(1+g)}{(r-g)}\cdot\frac{1}{(1+r)^N},\qquad FCF_N=FCF_0(1+g)^N
-\\]
+### DCF (Discounted Cash Flow)
+```
+Firm Value = Σ[FCF₀(1+g)ᵗ / (1+r)ᵗ] + [FCFₙ(1+g) / (r-g)] × [1/(1+r)ᴺ]
+where FCFₙ = FCF₀(1+g)ᴺ
+```
 
-**DDM (two‑stage, simplified)**  
-\\[
-P_0\approx \sum_{i=1}^{n}\frac{D_0(1+g)^i}{(1+k_e)^i}+\frac{D_{n+1}}{k_e-g}\cdot\frac{1}{(1+k_e)^n}
-\\]
+### DDM (Dividend Discount Model - two‑stage, simplified)
+```
+P₀ ≈ Σ[D₀(1+g)ⁱ / (1+ke)ⁱ] + [D_{n+1} / (ke-g)] × [1/(1+ke)ⁿ]
+```
 
-**Graham Number**  
-\\[
-\sqrt{22.5\times EPS\times BVPS}
-\\]
+### Graham Number
+```
+√(22.5 × EPS × BVPS)
+```
 
-**Residual Income (full valuation form)**  
-\\[
-\text{Intrinsic Value}\;=\;BV_0\;+\;\sum_{t=1}^{N}\frac{RI_t}{(1+k_e)^t},\qquad RI_t=(ROE_t-k_e)\times BV_{t-1}
-\\]
+### Residual Income (full valuation form)
+```
+Intrinsic Value = BV₀ + Σ[RIₜ / (1+ke)ᵗ]
+where RIₜ = (ROEₜ - ke) × BV_{t-1}
+```
 
-**EV/EBITDA**  
-\\[
-\frac{EV}{EBITDA},\qquad EV=Market\ Cap+Debt-Cash
-\\]
-
----
-
-## 🖼️ Demo gallery (drop your screenshots here)
-
-Create a `demo/` folder and add images like:
-
-- `demo/pe_pb_head.png` — first rows of **pe_pb.csv**
-- `demo/ri_head.png` — first rows of **residual_income.csv** (highlight `roe`, `ke`, `abnormal_earnings`)
-- `demo/ev_ebitda_head.png` — first rows of **ev_ebitda.csv**
-- `demo/report_html.png` — browser shot of **report.html** (colour coded)
-- `demo/combined_head.png` — first rows of **combined_models.csv**
-
-Add them to the README where you like, e.g.:
-
-```markdown
-![P/E & P/B](demo/pe_pb_head.png)
-![Residual Income](demo/ri_head.png)
-![EV/EBITDA](demo/ev_ebitda_head.png)
-![Coloured Report](demo/report_html.png)
-![Consolidated Table](demo/combined_head.png)
+### EV/EBITDA
+```
+EV / EBITDA
+where EV = Market Cap + Debt - Cash
 ```
 
 ---
-
 
 ## 🖼️ Demo gallery
 
@@ -133,8 +110,9 @@ All screenshots are generated by the notebook and saved under `output/`.
 ### Consolidated conclusion
 ![Conclusion / model votes](output/conclusion.PNG)
 
+---
 
-## ⚙️ Minimal “how to run locally”
+## ⚙️ Minimal "how to run locally"
 
 ```bash
 pip install -U yfinance pandas numpy
@@ -153,6 +131,7 @@ Optional config (`config.json`):
   }
 }
 ```
+
 Optional growth overrides (`output/growth_rates.csv`):
 ```
 Ticker, recommended_g_buffett_percent, recommended_g_ddm_decimal
