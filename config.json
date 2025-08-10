@@ -1,10 +1,8 @@
 {
-  "risk_free_rate": 0.045,
+  "period_years": 5,
+  "risk_free_rate": 0.04,
   "market_risk_premium": 0.055,
-  "discount_rate": 0.09,
-  "terminal_growth": 0.025,
-  "ddm_defaults": {
-    "payout_ratio": 0.4,
-    "long_run_growth": 0.04
-  }
+  "terminal_growth": 0.02,
+  "dcf_discount_rate": 0.09,
+  "output_dir": "output"
 }
