@@ -1,11 +1,6 @@
 
-# 📈 Valuation Models — Seven‑Lens CSV Demo
+# 📈 Valuation Models 
 
-A **CSV‑first valuation showcase** built around a single notebook, `Valuation_Demo.ipynb`.  
-Run once → emit clean CSVs for seven valuation lenses → take screenshots → (optionally) publish a coloured HTML table.
-
-> **Demo / educational use only — not investment advice.**  
-> Data: Yahoo Finance via `yfinance`. Coverage varies by market/sector; gaps are expected for ETFs/financials/non‑US tickers.
 
 ---
 
@@ -20,9 +15,7 @@ Run once → emit clean CSVs for seven valuation lenses → take screenshots →
 
 ---
 
-## 🧭 Models at a glance (7 total)
-
-![Models at a glance](output/models_overview.png)
+## Models at a glance (7 total)
 
 
 | Model | Status | Data Source / Calculation | Formula |
@@ -30,7 +23,7 @@ Run once → emit clean CSVs for seven valuation lenses → take screenshots →
 | **DCF (Discounted Cash Flow)** | ✅ Implemented | Free cash flow from cashflow statement; discount & terminal growth from `config.json` | See formula below |
 | **DDM (Dividend Discount Model)** | ✅ Implemented | Dividend history or `EPS × payout_ratio`; long‑run `g` from `config.json` or `growth_rates.csv` | Two‑stage Gordon |
 | **Graham Number** | ✅ Implemented | EPS & BVPS from fundamentals | \$ \sqrt{22.5 \times EPS \times BVPS} \$ |
-| **Buffett Fair Value (approx.)** | ✅ Implemented | EPS & growth (percent) from `growth_rates.csv` or info fallback | \$ EPS \times (8.5 + 2g\%) \$ |
+| **Buffett Fair Value (approx.)** | ✅ Implemented | EPS & growth (percent) from `growth_rates.csv` or info fallback | \$$ EPS \times (8.5 + 2g\%) \$$ |
 | **Relative Valuation (P/E, P/B)** | ⚠️ Data pulled only | `trailingPE`, `priceToBook` (or `price / bookValue`) from `yfinance` | Direct multiples |
 | **Residual Income (ROE snapshot)** | ⚠️ Data pulled only | ROE, BVPS, cost of equity \$ k_e=r_f+\beta \cdot MRP \$ | \$ AE=(ROE-k_e)\times BV \$ *(snapshot)* |
 | **EV/EBITDA Multiple** | ⚠️ Data pulled only | EV from market cap + debt − cash; EBITDA from info | \$ \tfrac{EV}{EBITDA} \$ |
