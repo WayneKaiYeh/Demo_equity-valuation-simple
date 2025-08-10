@@ -1,19 +1,23 @@
-# 📈 Equity Valuation Demo
+Equity Valuation Demo
+This project demonstrates how to fetch financial data with Python and yfinance, and compute several common equity valuation models.
+Included models:
 
-本專案展示如何以 Python 與 `yfinance` 抓取財務數據，並計算多種常見的股票估值模型。  
-模型包含：
-- **DCF**（Discounted Cash Flow，折現現金流）
-- **DDM**（Dividend Discount Model，股利折現模型）
-- **Graham Number**（葛拉漢合理價）
-- **Buffett Approximation**（巴菲特簡化版合理價公式）
+DCF (Discounted Cash Flow)
 
-並自動輸出：
-- `results.csv`：Result
-- `report.html`：帶顏色標註的估值報表（綠色 = 被低估，紅色 = 被高估）
+DDM (Dividend Discount Model)
 
+Graham Number
+
+Buffett Approximation (simplified fair-price formula)
+
+It automatically outputs:
+
+results.csv: Result
+
+report.html: Colour-coded valuation report (green = undervalued, red = overvalu
 ---
 
-## 📂 Structure
+## Structure
 ```
 equity-valuation-demo/
 ├─ config.json # default parameters
@@ -29,49 +33,64 @@ equity-valuation-demo/
 
 ---
 
-## ⚙️ 流程
+Workflow
+Load configuration and tickers
 
-1. **讀取設定檔與股票清單**
-   - `config.json`：包含折現率、永續成長率、DDM 預設派息比率等
-   - `tickers.txt`：每行一個股票代碼（例如 AAPL、MSFT、TSM）
+config.json: discount rate, terminal growth rate, default payout ratio for DDM, etc.
 
-2. **抓取財務數據**
-   - 使用 `yfinance` 取得：
-     - 現金流量表（CFO、CapEx）
-     - 股價、EPS、Book Value
-     - 股利記錄
+tickers.txt: one ticker per line (e.g., AAPL, MSFT, TSM)
 
-3. **計算各模型估值**
-   - **DCF**：以最近一期自由現金流為基礎，投影未來 N 年並折現，加上終值
-   - **DDM**：兩階段股利成長模型
-   - **Graham Number**：基於 EPS 與每股淨值
-   - **Buffett Approximation**：基於 EPS 與預估成長率
+Fetch financial data
 
-4. **整合結果**
-   - 計算四種模型的中位數作為「基準合理價」
-   - 計算上漲空間（Upside %）
-   - 標記 **Undervalued** / **Overvalued**
+Use yfinance to obtain:
 
-5. **輸出**
-   - `results.csv`：純數據
-   - `report.html`：Note 欄位綠/紅底色報表
+Cash Flow (CFO, CapEx)
+
+Price, EPS, Book Value
+
+Dividend history
+
+Run valuation models
+
+DCF: project from the latest free cash flow for N years and discount to present; add terminal value
+
+DDM: two-stage dividend growth model
+
+Graham Number: based on EPS and book value per share
+
+Buffett Approximation: based on EPS and estimated growth rate
+
+Aggregate results
+
+Compute the median of the four model values as the Baseline Fair Value
+
+Calculate Upside %
+
+Flag Undervalued / Overvalued
+
+Export
+
+results.csv: raw numbers
+
+report.html: colour-highlighted report with notes
+
 
 ---
 
-## 📐 模型與數學公式
+## 📐 Models & Formulae
 
-### 1. 折現現金流（DCF）
-假設：
-- 當前自由現金流 \( FCF_0 \)
-- 年成長率 \( g \)
-- 折現率 \( r \)
-- 永續成長率 \( g_t \)
-- 預估年數 \( N \)
+### 1. Discounted Cash Flow（DCF）
+Assumptions:
+- Current free cash flow \( FCF_0 \)
+- Annual growth rate \( g \)
+- Discount rate \( r \)
+- Terminal growth rate \( g_t \)
+- Projection horizon \( N \)
 
 
-# 企業估值公式
+#  Corporate Valuation Formula
 
-## 公司價值計算公式
+## Firm Value Calculation Formula
 
 $$
 \text{Firm Value} = \sum_{t=1}^{N} \frac{FCF_0 \cdot (1+g)^t}{(1+r)^t} + \frac{FCF_N \cdot (1+g_t)}{(r - g_t)} \cdot \frac{1}{(1+r)^N}
@@ -79,75 +98,55 @@ $$
 
 其中：`FCF_N = FCF_0 × (1+g)^N`
 
-## 每股合理價
+## fair value per share
 
 $$
 \text{Fair Value per Share} = \frac{\text{Firm Value} + \text{Cash} - \text{Debt}}{\text{Shares Outstanding}}
 $$
 
-## 變數說明
+## varibles
 
-- $FCF_0$：基期自由現金流
-- $g$：成長率
-- $r$：折現率（WACC）
-- $N$：預測期間
-- $g_t$：永續成長率
-
-## 每股合理價
-
-$$
-\text{Fair Value per Share} = \frac{\text{Firm Value} + \text{Cash} - \text{Debt}}{\text{Shares Outstanding}}
-$$
-
-## 變數說明
-
-- $FCF_0$：基期自由現金流
-- $g$：成長率
-- $r$：折現率（WACC）
-- $N$：預測期間
-- $g_t$：永續成長率
-
-
-
-
-
-
+- $FCF_0$：base free cash flow
+- $g$：growth rate
+- $r$：discount rate (WACC)
+- $N$：projection years
+- $g_t$： terminal growth rate
 
 ---
 
-### 2. 股利折現模型（兩階段 DDM）
-假設：
-- 當前股利 $D_0$
-- 第一階段年成長率 $g_1$（持續 $n$ 年）
-- 第二階段永續成長率 $g_2$
-- 折現率 $r$
+### 2. Dividend Discount Model (Two-Stage DDM)
+assumptions：
+- Current dividend $D_0$
+- First-stage growth $g_1$（for $n$ years）
+- Terminal (second-stage) growth $g_2$
+- Discount rate $r$
 
-公式：
+Formula：
 
 $$\text{Value} = \sum_{t=1}^{n} \frac{D_0 \times (1+g_1)^t}{(1+r)^t} + \frac{D_n \times (1+g_2)}{(r - g_2)} \times \frac{1}{(1+r)^n}$$
 
-其中：
+and：
 
 $$D_n = D_0 \times (1+g_1)^n$$
 
 ---
 
 ### 3. Graham Number
-Benjamin Graham 提出的保守合理價公式：
+Benjamin Graham’s conservative fair-value formula:
 
 $$
 \text{Graham Number} = \sqrt{22.5 \cdot EPS \cdot BVPS}
 $$
-- EPS：每股盈餘
-- BVPS：每股淨值
+- EPS： earnings per share
+- BVPS：book value per share(每股淨值)
 
 ---
 
 ### 4. Buffett Approximation
-簡化版的巴菲特合理價公式（教學用）：
+Simplified Buffett fair-price formula:
 
 $$
 \text{Fair Price} = EPS \times (8.5 + 2 \times g)
 $$
-- $g$：成長率（%）
+- $g$：growth rate (%)
 ---
