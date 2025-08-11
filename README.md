@@ -1,15 +1,9 @@
 # 📈 Valuation Models 
 
----
 
-## ✨ What this repo demonstrates
 
-- **Seven valuation lenses** in one pass (see table below)
-- **CSV‑first outputs** to `/output` + a **colour‑coded HTML** report (`report.html`)
-- **Growth‑rate overrides** per ticker via `output/growth_rates.csv`
-- **Consolidated view** (`combined_models.csv`) that merges all CSVs on `Ticker`
-- **Resilient to missing data**: header‑only CSVs rather than crashes; robust merges
-- **CI‑friendly**: single entry‑point notebook that you can wire to GitHub Actions
+
+
 
 ---
 
@@ -17,19 +11,18 @@
 
 | Model | Status | Data Source / Calculation | Formula |
 |---|:--:|---|---|
-| **DCF (Discounted Cash Flow)** | ✅ Implemented | Free cash flow from cashflow statement; discount & terminal growth from `config.json` | See formula below |
-| **DDM (Dividend Discount Model)** | ✅ Implemented | Dividend history or `EPS × payout_ratio`; long‑run `g` from `config.json` or `growth_rates.csv` | Two‑stage Gordon |
-| **Graham Number** | ✅ Implemented | EPS & BVPS from fundamentals | √(22.5 × EPS × BVPS) |
-| **Buffett Fair Value (approx.)** | ✅ Implemented | EPS & growth (percent) from `growth_rates.csv` or info fallback | `EPS × (8.5 + 2g%)` |
-| **Relative Valuation (P/E, P/B)** | ⚠️ Data pulled only | `trailingPE`, `priceToBook` (or `price / bookValue`) from `yfinance` | Direct multiples |
-| **Residual Income (ROE snapshot)** | ⚠️ Data pulled only | ROE, BVPS, cost of equity ke = rf + β × MRP | AE = (ROE - ke) × BV *(snapshot)* |
-| **EV/EBITDA Multiple** | ⚠️ Data pulled only | EV from market cap + debt − cash; EBITDA from info | EV / EBITDA |
+| **DCF (Discounted Cash Flow)** |  Implemented | Free cash flow from cashflow statement; discount & terminal growth from `config.json` | See formula below |
+| **DDM (Dividend Discount Model)** |  Implemented | Dividend history or `EPS × payout_ratio`; long‑run `g` from `config.json` or `growth_rates.csv` | Two‑stage Gordon |
+| **Graham Number** |  Implemented | EPS & BVPS from fundamentals | √(22.5 × EPS × BVPS) |
+| **Buffett Fair Value (approx.)** |  Implemented | EPS & growth (percent) from `growth_rates.csv` or info fallback | `EPS × (8.5 + 2g%)` |
+| **Relative Valuation (P/E, P/B)** |  Data pulled only | `trailingPE`, `priceToBook` (or `price / bookValue`) from `yfinance` | Direct multiples |
+| **Residual Income (ROE snapshot)** |  Data pulled only | ROE, BVPS, cost of equity ke = rf + β × MRP | AE = (ROE - ke) × BV *(snapshot)* |
+| **EV/EBITDA Multiple** |  Data pulled only | EV from market cap + debt − cash; EBITDA from info | EV / EBITDA |
 
-> **Why "Data pulled only"?** For the last three, the notebook outputs the raw/derived ratios for comparison. A full multi‑period RI valuation is shown by formula but intentionally not expanded in this demo.
 
 ---
 
-## 📁 Outputs (for screenshots)
+##  Outputs 
 
 ```
 output/
@@ -44,7 +37,7 @@ output/
 
 ---
 
-## 🔎 Column glossary (quick meanings)
+## Column glossary (quick meanings)
 
 - **Ticker** — instrument code (e.g., `AAPL`, `2330.TW`, `GLD`)  
 - **price** — latest price (recent close or real‑time fallback)  
@@ -60,7 +53,7 @@ output/
 
 ---
 
-## 🧮 Formulae (reference)
+## Formulae (reference)
 
 ### DCF (Discounted Cash Flow)
 ```
@@ -138,8 +131,8 @@ GitHub: https://github.com/WayneKaiYeh
 ## 📄 License
 
 This repository is shared under the **Creative Commons BY‑NC‑ND 4.0** licence.  
-- ❌ No commercial use
-- ❌ No derivatives or redistribution
-- ✅ Attribution required
+-  No commercial use
+-  No derivatives or redistribution
+-  Attribution required
 
 All rights to any private research notebooks and datasets are reserved.
