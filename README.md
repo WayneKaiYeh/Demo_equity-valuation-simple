@@ -57,11 +57,11 @@ Firm Value = Σ[FCF₀(1+g)ᵗ / (1+r)ᵗ] + [FCFₙ(1+g) / (r-g)] × [1/(1+r)�
 where FCFₙ = FCF₀(1+g)ᴺ
 
 Assumptions:
-- Current free cash flow \( FCF_0 \)
-- Annual growth rate \( g \)
-- Discount rate \( r \)
-- Terminal growth rate \( g_t \)
-- Projection horizon \( N \)
+- Current free cash flow FCF_0 
+- Annual growth rate g 
+- Discount rate  r 
+- Terminal growth rate g_t
+- Projection horizon N
 
 
 ```
@@ -71,12 +71,18 @@ Assumptions:
 ### DDM (Dividend Discount Model - two‑stage, simplified)
 ```
 P₀ ≈ Σ[D₀(1+g)ⁱ / (1+ke)ⁱ] + [D_{n+1} / (ke-g)] × [1/(1+ke)ⁿ]
+
+where:
+D_n = D_0 * (1+g_1)^n
 ```
 ![DDM — Two‑stage Dividend Discount](output/ddm.PNG)
 
 ### Graham Number
 ```
 √(22.5 × EPS × BVPS)
+
+- **EPS**: earnings per share
+- **BVPS**: book value per share
 ```
 ![Graham Number table](output/graham.PNG)
 
@@ -96,6 +102,12 @@ where EV = Market Cap + Debt - Cash
 
 
 ### Buffett fair price
+
+
+```
+Fair Price = EPS * (8.5 + 2 * g)
+g: growth rate (%)
+```
 ![Buffett fair price panel](output/buffett_dcf.PNG)
 
 ### P/E & P/B relative
