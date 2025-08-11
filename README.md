@@ -55,6 +55,15 @@ output/
 ```
 Firm Value = Σ[FCF₀(1+g)ᵗ / (1+r)ᵗ] + [FCFₙ(1+g) / (r-g)] × [1/(1+r)ᴺ]
 where FCFₙ = FCF₀(1+g)ᴺ
+
+Assumptions:
+- Current free cash flow \( FCF_0 \)
+- Annual growth rate \( g \)
+- Discount rate \( r \)
+- Terminal growth rate \( g_t \)
+- Projection horizon \( N \)
+
+
 ```
 ![DCF — Fair Value & Margin of Safety](output/dcf.PNG)
 
