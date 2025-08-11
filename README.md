@@ -1,4 +1,4 @@
-# 📈 Valuation Models 
+# Valuation Models 
 
 This comprehensive equity valuation toolkit implements seven fundamental valuation methodologies (DCF, DDM, Graham Number, Buffett Fair Value, P/E & P/B multiples, Residual Income, and EV/EBITDA) in a unified Python framework. The project automates financial data collection via yfinance APIs and generates comparative analysis across multiple stocks simultaneously, outputting both CSV datasets and color-coded HTML reports. Designed for academic research and practical investment analysis, it demonstrates how different valuation approaches can complement each other while handling missing data gracefully and supporting configurable parameters for sensitivity analysis. This framework represents a synthesis of financial modeling theory and modern data science techniques, providing a robust foundation for equity research and portfolio-level analysis.
 ---
